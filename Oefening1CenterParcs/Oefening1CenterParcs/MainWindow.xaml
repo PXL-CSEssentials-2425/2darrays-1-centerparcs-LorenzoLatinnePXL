@@ -17,10 +17,10 @@
             <TextBlock Text="Center Parcs" FontSize="40" Foreground="LimeGreen" Margin="5"  HorizontalAlignment="Center"></TextBlock>
             
             <TextBlock HorizontalAlignment="Left" Margin="5">Type woning</TextBlock>
-            <ComboBox Name="typeWoningComboBox" Margin="5"></ComboBox>
+            <ComboBox Name="typeWoningComboBox" Margin="5" SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
             
             <TextBlock HorizontalAlignment="Left" Margin="5">Aantal dagen</TextBlock>
-            <ComboBox Name="aantalDagenComboBox" Margin="5"></ComboBox>
+            <ComboBox Name="aantalDagenComboBox" Margin="5" SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
             
             <TextBlock HorizontalAlignment="Left" Margin="5"> Prijs</TextBlock>
             <TextBox Name="prijsTextBox" Margin="5" IsEnabled="False"></TextBox>

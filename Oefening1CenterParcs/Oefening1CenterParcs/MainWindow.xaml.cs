@@ -41,7 +41,7 @@ namespace Oefening1CenterParcs
             // Wanneer het venster reeds is aangemaakt en getoond wordt.
 
             // 1d array inladen in ComboBoxItems
-            for (int i = 0; i <  _numberOfDays.Length; i++)
+            for (int i = 0; i < _numberOfDays.Length; i++)
             {
                 ComboBoxItem item = new ComboBoxItem();
                 item.Content = _numberOfDays[i];
@@ -55,6 +55,49 @@ namespace Oefening1CenterParcs
                 ComboBoxItem newItem = new ComboBoxItem();
                 newItem.Content = houseToAddToComboBox;
                 typeWoningComboBox.Items.Add(newItem);
+            }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Check die controleert of beide comboboxen een item hebben geselecteerd
+            // SelectedIndex (zie docs) (of SelectedItem (zie docs))
+            if (typeWoningComboBox.SelectedIndex != -1 && aantalDagenComboBox.SelectedIndex != -1)
+            {
+                double price = 1;
+                double aantalDagen = 0;
+
+                // op basis van SelectedIndex (of SelectedItem) 
+                // afleiden wat de prijs is van de accomodatie
+                // vergeet niet te converteren van string naar double
+                ComboBoxItem geselecteerdAantalDagenComboBoxItem = (ComboBoxItem)aantalDagenComboBox.SelectedItem;
+                // of
+                geselecteerdAantalDagenComboBoxItem = aantalDagenComboBox.SelectedItem as ComboBoxItem;
+
+                string inhoudVanGeselecteerdAantalDagenComboBoxItem = geselecteerdAantalDagenComboBoxItem.Content.ToString();
+                aantalDagen = Convert.ToDouble(inhoudVanGeselecteerdAantalDagenComboBoxItem);
+                price = 1;
+
+                // Gebruik SelectedIndex
+                int indexGeselecteerdItemVanDeTypeWoning = typeWoningComboBox.SelectedIndex;
+                ComboBoxItem selectedWoningType = (ComboBoxItem)typeWoningComboBox.Items[indexGeselecteerdItemVanDeTypeWoning];
+                string benamingVanTypeWoning = selectedWoningType.Content.ToString();
+
+                for (int i = 0; i < _houseWithPrice.GetLength(0); i++)
+                {
+                    if (_houseWithPrice[i, 0].Equals(benamingVanTypeWoning))
+                    {
+                        price = Convert.ToDouble(_houseWithPrice[i, 1]);
+                    }
+                }
+
+                // Of 
+                price = Convert.ToDouble(_houseWithPrice[typeWoningComboBox.SelectedIndex, 1]);
+
+                double result = price * aantalDagen;
+
+                prijsTextBox.Text = result.ToString("c");
+
             }
         }
     }
